@@ -1,0 +1,21 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AppHondaDuyDuc"
+        xmlns:Model="clr-namespace:AppHondaDuyDuc.Model" x:Class="AppHondaDuyDuc.AddCustomerWindown"
+        mc:Ignorable="d"
+        Title="AddCustomerWindown" Height="600" Width="600"
+        >
+  <Grid>
+    <Border>
+  
+    </Border>
+    
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition/>
+      <ColumnDefinition Width="0*"/>
+    </Grid.ColumnDefinitions>
+  </Grid>
+</Window>

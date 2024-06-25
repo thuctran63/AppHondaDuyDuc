@@ -1,13 +1,13 @@
 ﻿using AppHondaDuyDuc.Model;
 using MongoDB.Driver;
 
-namespace AppHondaDuyDuc.Data
+namespace AppHondaDuyDuc.Database
 {
-    public static class MongoDB
+    public static class Mongo
     {
         private static readonly IMongoDatabase _database;
 
-        static MongoDB()
+        static Mongo()
         {
             var client = new MongoClient("mongodb://localhost:27017");
             _database = client.GetDatabase("DuyDuc");

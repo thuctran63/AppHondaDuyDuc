@@ -18,5 +18,17 @@ namespace AppHondaDuyDuc.Model
 
         [BsonElement("address")]
         public Address Address { get; set; }
+
+        [BsonElement("orders")]
+        public List<string> OrderIds { get; set; }
+
+        [BsonElement("debt")]
+        public double Debt { get; set; }
+
+        public Customer()
+        {
+            Id = ObjectId.GenerateNewId().ToString();
+            OrderIds = new List<string>();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using AppHondaDuyDuc.Database;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +20,7 @@ namespace AppHondaDuyDuc
     public MainWindow()
     {
       InitializeComponent();
+      GetAllData();
     }
 
     private void btnAddCustomer_Click(object sender, RoutedEventArgs e)
@@ -28,5 +30,21 @@ namespace AppHondaDuyDuc
       addCustomerWindown.Activate();
       addCustomerWindown.Show();
     }
-  }
+
+    private async void GetAllData()
+    {
+        using (var customerRepos = new CustomerRepos())
+        {
+            var customers = await customerRepos.GetAllCustomersAsync();
+            dgvCustomer.ItemsSource = customers;
+
+        }
+
+    }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            GetAllData();
+        }
+    }
 }

@@ -29,7 +29,7 @@
         <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1" Margin="5">
             <Grid Margin="0,0,-1,-1">
                 <Label FontSize="14" FontWeight="Heavy" Content="Thông tin đơn hàng (nếu có):" HorizontalAlignment="Left" Height="31" VerticalAlignment="Top" Width="223" Margin="10,5,0,0"/>
-                <DataGrid x:Name="dgvProducts" LostFocus="dgvProducts_LostFocus" AutoGenerateColumns="False" Margin="9,118,11,0" CanUserAddRows="True" CanUserDeleteRows="True" SelectedIndex="0" Height="165" VerticalAlignment="Top">
+                <DataGrid FontSize="15" x:Name="dgvProducts" LostFocus="dgvProducts_LostFocus" AutoGenerateColumns="False" Margin="9,118,11,0" CanUserAddRows="True" CanUserDeleteRows="True" SelectedIndex="0" Height="165" VerticalAlignment="Top">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Tên phụ tùng" Width="*" Binding="{Binding Name}"/>
                         <DataGridTextColumn Header="Giá" Width="*" Binding="{Binding Price}" />

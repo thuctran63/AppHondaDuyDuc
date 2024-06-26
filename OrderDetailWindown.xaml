@@ -1,0 +1,32 @@
+﻿<Window x:Class="AppHondaDuyDuc.OrderDetailWindown"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AppHondaDuyDuc"
+        mc:Ignorable="d"
+        Title="OrderDetailWindown" Height="600" Width="600"
+        FontSize="16">
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Tên đơn hàng:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" Text="Mô tả:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,62,0,0" TextWrapping="Wrap" Text="Thời gian:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="txtNameOrder" HorizontalAlignment="Left" Margin="129,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="194"/>
+        <TextBlock x:Name="txtDescription" HorizontalAlignment="Left" Margin="129,36,0,0" Text="TextBlock" VerticalAlignment="Top" Width="461" TextWrapping="Wrap"/>
+        <TextBlock x:Name="txtDate" HorizontalAlignment="Left" Margin="129,62,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="194"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,88,0,0" TextWrapping="Wrap" Text="Biển số xe:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="txtBienSoXe" HorizontalAlignment="Left" Margin="129,88,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="443"/>
+        <DataGrid x:Name="dgv" Margin="10,139,10,150">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Tên phụ tùng" Width="*" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Giá" Width="*" Binding="{Binding Price}" />
+                <DataGridTextColumn Header="Số lượng" Width="*" Binding="{Binding Quantity}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock HorizontalAlignment="Left" Margin="10,451,0,0" TextWrapping="Wrap" Text="Tổng số tiền:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,477,0,0" TextWrapping="Wrap" Text="Còn nợ:" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtDebt" HorizontalAlignment="Left" Margin="114,477,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBlock x:Name="txtSum" HorizontalAlignment="Left" Margin="114,451,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnEdit" Content="Chỉnh sửa" HorizontalAlignment="Left" Margin="11,521,0,0" VerticalAlignment="Top" Width="90"/>
+    </Grid>
+</Window>

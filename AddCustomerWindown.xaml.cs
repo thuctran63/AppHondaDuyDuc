@@ -125,7 +125,7 @@ namespace AppHondaDuyDuc
                     o.Debt =  (Double.Parse(txtPay.Text) - CalcSumOrder()) < 0 ? Double.Parse(txtPay.Text) - CalcSumOrder() : 0;
                     o.Sum = CalcSumOrder();
                     o.NameOrder = txtNameOrder.Text;
-                    o.Time = cbIsToday.IsChecked == true ? DateTime.Today : datepicker.SelectedDate ?? DateTime.Now;
+                    o.Time = cbIsToday.IsChecked == true ? DateTime.Now.Date : datepicker.SelectedDate ?? DateTime.Now.Date;
                     
                     c.OrderIds.Add(o.Id.ToString());
                     await orderRepos.AddOrderAsync(o);

@@ -5,43 +5,81 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppHondaDuyDuc"
         mc:Ignorable="d"
-        Title="MainWindow" Height="803" Width="1280">
+        Title="MainWindow"
+        WindowState="Maximized"
+        FontSize="16" d:DesignHeight="957.74" d:DesignWidth="1454.5">
+
     <Grid Margin="0,0,0,5">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="50*"/>
+            <!-- Chiếm 70% chiều rộng -->
+            <ColumnDefinition Width="50*"/>
+            <!-- Chiếm 30% chiều rộng -->
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dgvCustomer" Margin="11,104,420,10" AutoGenerateColumns="False" CanUserAddRows="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Tên khách hàng" Width="*" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Số điện thoại" Width="*" Binding="{Binding PhoneNumber}" />
-                <DataGridTemplateColumn Header="Địa chỉ" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock>
-                                <Run Text="{Binding Address.Village}" />
-                                <Run Text=", " />
-                                <Run Text="{Binding Address.Wards}" />
-                                <Run Text=", " />
-                                <Run Text="{Binding Address.Province}" />
-                            </TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Số tiền nợ" Width="*" Binding="{Binding Debt}" />
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button x:Name="btnAddCustomer" Content="Thêm khách hàng" HorizontalAlignment="Left" Margin="11,61,0,0" VerticalAlignment="Top" Height="34" Width="118" Click="btnAddCustomer_Click"/>
+
+        <!-- Phần chính bên trái -->
+        <Grid Grid.Column="0">
+            <DataGrid x:Name="dgvCustomer" Margin="11,104,10,10" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Tên khách hàng" Width="*" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Số điện thoại" Width="*" Binding="{Binding PhoneNumber}" />
+                    <DataGridTemplateColumn Header="Địa chỉ" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextWrapping="Wrap">
+                                    <Run Text="{Binding Address.Village}" />
+                                    <Run Text=", " />
+                                    <Run Text="{Binding Address.Wards}" />
+                                    <Run Text=", " />
+                                    <Run Text="{Binding Address.Province}" />
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Số tiền nợ" Width="*" Binding="{Binding Debt}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <!-- Phần bên phải -->
+        <Grid Grid.Column="1" Margin="0,104,10,10">
+            <Border BorderBrush="Black" BorderThickness="2">
+                <Grid Margin="-2,-2,-2,-2">
+                    <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Tên khách hàng: " VerticalAlignment="Top"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" Text="Số điện thoại: " VerticalAlignment="Top"/>
+                    <DataGrid x:Name="dgvOrder" Margin="10,106,10,10" AutoGenerateColumns="False" CanUserAddRows="False" SelectionChanged="dgvOrder_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Tên đơn hàng" Binding="{Binding NameOrder}" Width="*" />
+                            <DataGridTextColumn Header="Biển số xe" Binding="{Binding LicensePlates}" Width="*" />
+                            <DataGridTextColumn Header="Thời gian" Binding="{Binding Time}" Width="*" />
+                            <DataGridTextColumn Header="Tổng đơn hàng" Binding="{Binding Sum}" Width="*" />
+                            <DataGridTextColumn Header="Số tiền nợ" Binding="{Binding Debt}" Width="*" />
+                            <DataGridTemplateColumn Header="Chi tiết" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Desciption}" TextWrapping="Wrap"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,80,0,0" TextWrapping="Wrap" Text="Danh sách đơn hàng" VerticalAlignment="Top" Width="226" FontWeight="Bold"/>
+                    <!-- Thêm nội dung của bạn vào đây -->
+                </Grid>
+            </Border>
+            <TextBlock x:Name="txtNameView2" HorizontalAlignment="Left" Margin="135,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="281"/>
+            <TextBlock x:Name="txtPhoneView2" HorizontalAlignment="Left" Margin="135,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="281"/>
+        </Grid>
+
+        <!-- Các phần tử khác -->
+        <Button x:Name="btnAddCustomer" Content="Thêm khách hàng" HorizontalAlignment="Left" Margin="11,61,0,0" VerticalAlignment="Top" Height="34" Width="146" Click="btnAddCustomer_Click"/>
         <Label Content="" HorizontalAlignment="Left" Margin="10,186,0,0" VerticalAlignment="Top" Width="63"/>
-        <Border BorderBrush="Black" BorderThickness="2" Margin="865,104,10,10">
-            <Grid Margin="879,190,28,10"/>
-        </Border>
-        <ComboBox HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" Width="148"/>
-        <Button Content="Tìm kiếm" HorizontalAlignment="Left" Margin="408,10,0,0" VerticalAlignment="Top" Height="30" Width="106"/>
-        <Button x:Name="btnAddCustomer_Copy" Content="Chỉnh sửa" HorizontalAlignment="Left" Margin="148,61,0,0" VerticalAlignment="Top" Height="34" Width="118" Click="btnAddCustomer_Click"/>
-        <Button x:Name="btnAddCustomer_Copy1" Content="Xoá" HorizontalAlignment="Left" Margin="283,61,0,0" VerticalAlignment="Top" Height="34" Width="118" Click="btnAddCustomer_Click"/>
-        <Button x:Name="btnAddCustomer_Copy2" Content="Thêm hoá đơn" HorizontalAlignment="Left" Margin="742,56,0,0" VerticalAlignment="Top" Height="34" Width="118" Click="btnAddCustomer_Click"/>
-        <TextBox HorizontalAlignment="Left" Margin="163,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="238" Height="30"/>
-        <Button Content="Làm mới" HorizontalAlignment="Left" Margin="461,61,0,0" VerticalAlignment="Top" Height="34" Width="53" Click="Button_Click"/>
+        <ComboBox x:Name="cbbOptions" HorizontalAlignment="Left" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" Width="148"/>
+        <Button Content="Tìm kiếm" HorizontalAlignment="Left" Margin="408,10,0,0" VerticalAlignment="Top" Height="30" Width="106" Click="Button_Click_1"/>
+        <Button x:Name="btnAddCustomer_Copy" Content="Chỉnh sửa" HorizontalAlignment="Left" Margin="162,61,0,0" VerticalAlignment="Top" Height="34" Width="142" Click="btnAddCustomer_Click"/>
+        <Button x:Name="btnAddCustomer_Copy1" Content="Xoá" HorizontalAlignment="Left" Margin="309,61,0,0" VerticalAlignment="Top" Height="34" Width="121" Click="btnAddCustomer_Click"/>
+        <Button x:Name="btnAddCustomer_Copy2" Content="Thêm hoá đơn" HorizontalAlignment="Left" Margin="599,61,0,0" VerticalAlignment="Top" Height="34" Width="118" Click="btnAddCustomer_Click"/>
+        <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Margin="163,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="238" Height="30"/>
+        <Button Content="Làm mới" HorizontalAlignment="Left" Margin="435,61,0,0" VerticalAlignment="Top" Height="34" Width="79" Click="Button_Click"/>
     </Grid>
 </Window>

@@ -27,6 +27,23 @@ namespace AppHondaDuyDuc.Database
             await _orders.InsertOneAsync(order);
         }
 
+        public async Task UpdateOrderAsync(Order order)
+        {
+            await _orders.ReplaceOneAsync(o => o.Id == order.Id, order);
+        }
+
+        public async Task DeleteOrderAsync(string orderId)
+        {
+            await _orders.DeleteOneAsync(o => o.Id == orderId);
+        }
+
+        // find order by plates
+        public async Task<List<Order>> FindOrderByPlates(string plates)
+        {
+            var orders = await _orders.Find(o => o.LicensePlates.Contains(plates)).ToListAsync();
+            return orders;
+        }
+
         public void Dispose()
         {
             // Clean up any resources if needed

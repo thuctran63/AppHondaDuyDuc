@@ -32,7 +32,8 @@ namespace AppHondaDuyDuc
             {
                 "Tên",
                 "Số điện thoại",
-                "Địa chỉ"
+                "Địa chỉ",
+                "Biển số xe"
             };
 
             cbbOptions.ItemsSource = options;
@@ -46,13 +47,25 @@ namespace AppHondaDuyDuc
             addCustomerWindown.Show();
         }
 
+        private void btnAddOrder_Click(object sender, RoutedEventArgs e)
+        {
+            var customerSelect = dgvCustomer.SelectedItem as Customer;
+
+            if(customerSelect != null)
+            {
+                AddCustomerWindown addCustomerWindown = new AddCustomerWindown(customerSelect);
+                addCustomerWindown.Activate();
+                addCustomerWindown.Show();
+            }
+            
+        }
+
         private async void GetAllData()
         {
             using (var customerRepos = new CustomerRepos())
             {
                 var customers = await customerRepos.GetAllCustomersAsync();
                 dgvCustomer.ItemsSource = customers;
-
             }
 
         }
@@ -74,15 +87,13 @@ namespace AppHondaDuyDuc
                     var orders = await orderRepos.GetAllOrderOfCustomer(selectedCustomer.Id);
 
                     dgvOrder.ItemsSource = orders.ToList();
-
                 }
             }
         }
 
-        private void dgvOrder_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void dgvOrder_ChooseOrder(object sender, MouseButtonEventArgs e)
         {
             var order = dgvOrder.SelectedItem as Order;
-
             if (order != null)
             {
                 OrderDetailWindown orderDetailWindown = new OrderDetailWindown(order);
@@ -121,6 +132,23 @@ namespace AppHondaDuyDuc
                         var listCustomer = await customerRepos.GetCustomerByAddress(txtSearch.Text);
                         dgvCustomer.ItemsSource = listCustomer.ToList();
                     }
+                }
+
+                if (option == "Biển số xe")
+                {
+                    var customerRepos = new CustomerRepos();
+                    var orderRepos = new OrderRepos();
+
+                    var listOrder = await orderRepos.FindOrderByPlates(txtSearch.Text);
+                    var listCustomer = new List<Customer>();
+
+                    foreach (var order in listOrder)
+                    {
+                        var customer = await customerRepos.GetCustomerById(order.UserId);
+                        listCustomer.Add(customer);
+                    }
+                    listCustomer = listCustomer.Distinct().ToList();
+                    dgvCustomer.ItemsSource = listCustomer;
                 }
             }
         }

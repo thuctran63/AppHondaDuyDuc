@@ -30,5 +30,22 @@ namespace AppHondaDuyDuc.Model
             Id = ObjectId.GenerateNewId().ToString();
             OrderIds = new List<string>();
         }
+
+        public override bool Equals(object obj)
+        {
+            // Kiểm tra đối tượng này có phải là một Customer không
+            if (obj is Customer other)
+            {
+                // So sánh các thuộc tính mà bạn cho là quan trọng để xác định Customer trùng
+                return this.Id == other.Id;
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            // Trả về mã băm dựa trên thuộc tính mà bạn muốn so sánh (ví dụ: CustomerId)
+            return this.Id.GetHashCode();
+        }
     }
 }

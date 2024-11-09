@@ -25,6 +25,15 @@ namespace AppHondaDuyDuc.Database
             await _customers.InsertOneAsync(customer);
         }
 
+        // Tìm kiếm theo Id
+
+        public async Task<Customer> GetCustomerById(string id)
+        {
+            var cursor = await _customers.FindAsync(x => x.Id == id);
+            var customer = await cursor.FirstOrDefaultAsync();
+            return customer;
+        }
+
         public async Task<List<Customer>> GetCustomerByName(string name)
         {
             // Tìm kiếm theo tên (chữ thường) có chứa name (chữ thường)

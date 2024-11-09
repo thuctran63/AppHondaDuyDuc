@@ -9,6 +9,7 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using AppHondaDuyDuc.Database;
 using System.Windows.Media;
+using System.Xml.Linq;
 
 
 namespace AppHondaDuyDuc
@@ -24,11 +25,30 @@ namespace AppHondaDuyDuc
         private List<String> Wards { get; set; }
         private List<String> Provinces { get; set; }
 
+        private Customer customer;
+
         public AddCustomerWindown()
         {
             InitializeComponent();
             InitDataGridView();
             InitCBB();
+        }
+
+        public AddCustomerWindown(Customer customer)
+        {
+            InitializeComponent();
+            InitDataGridView();
+            InitCBB();
+
+            txtName.Text = customer.Name;
+            txtName.IsReadOnly = true;
+            txtPhone.Text = customer.PhoneNumber;
+            txtPhone.IsReadOnly = true;
+            cbbVillages.SelectedValue = customer.Address.Village;
+            cbbWards.SelectedValue = customer.Address.Wards;
+            cbbProvinces.SelectedValue = customer.Address.Province;
+
+            this.customer = customer;
         }
 
         private void InitDataGridView()
@@ -102,40 +122,65 @@ namespace AppHondaDuyDuc
             {
                 var customerRepos = new CustomerRepos();
 
-                string name = txtName.Text;
-                string phone = txtPhone.Text;
-                Address address = new Address(cbbVillages.Text, cbbWards.Text, cbbProvinces.Text);
-
-                Customer c = new Customer();
-                c.Address = address;
-                c.Name = name;
-                c.PhoneNumber = phone;
-
-                
-
-                if (CalcSumOrder() > 0)
+                if(this.customer != null)
                 {
-                    var orderRepos = new OrderRepos();
+                    if (CalcSumOrder() > 0)
+                    {
+                        var orderRepos = new OrderRepos();
 
-                    Order o = new Order();
-                    o.Desciption = txtDescription.Text;
-                    o.LicensePlates = txtlicensePlates.Text;
-                    o.Products = Products.ToList();
-                    o.UserId = c.Id;
-                    o.Debt =  (Double.Parse(txtPay.Text) - CalcSumOrder()) < 0 ? Double.Parse(txtPay.Text) - CalcSumOrder() : 0;
-                    o.Sum = CalcSumOrder();
-                    o.NameOrder = txtNameOrder.Text;
-                    o.Time = cbIsToday.IsChecked == true ? DateTime.Now.Date : datepicker.SelectedDate ?? DateTime.Now.Date;
-                    
-                    c.OrderIds.Add(o.Id.ToString());
-                    await orderRepos.AddOrderAsync(o);
+                        Order o = new Order();
+                        o.Desciption = txtDescription.Text;
+                        o.LicensePlates = txtlicensePlates.Text;
+                        o.Products = Products.ToList();
+                        o.UserId = customer.Id;
+                        o.Debt = (Double.Parse(txtPay.Text) - CalcSumOrder()) < 0 ? Double.Parse(txtPay.Text) - CalcSumOrder() : 0;
+                        o.Sum = CalcSumOrder();
+                        o.NameOrder = txtNameOrder.Text;
+                        o.Time = cbIsToday.IsChecked == true ? DateTime.Now.Date : datepicker.SelectedDate ?? DateTime.Now.Date;
+
+                        customer.OrderIds.Add(o.Id.ToString());
+                        await orderRepos.AddOrderAsync(o);
+                        MessageBox.Show($"Đã thêm thành công đơn hàng!");
+                    }
                 }
-                await customerRepos.AddCustomerAsync(c);
-                
-                MessageBox.Show($"Đã thêm thành công khách hàng: {name}");
+                else
+                {
+                    string name = txtName.Text;
+                    string phone = txtPhone.Text;
+                    Address address = new Address(cbbVillages.Text, cbbWards.Text, cbbProvinces.Text);
 
-                txtName.Clear();
-                txtPhone.Clear();
+                    Customer c = new Customer();
+                    c.Address = address;
+                    c.Name = name;
+                    c.PhoneNumber = phone;
+
+
+
+                    if (CalcSumOrder() > 0)
+                    {
+                        var orderRepos = new OrderRepos();
+
+                        Order o = new Order();
+                        o.Desciption = txtDescription.Text;
+                        o.LicensePlates = txtlicensePlates.Text;
+                        o.Products = Products.ToList();
+                        o.UserId = c.Id;
+                        o.Debt = (Double.Parse(txtPay.Text) - CalcSumOrder()) < 0 ? Double.Parse(txtPay.Text) - CalcSumOrder() : 0;
+                        o.Sum = CalcSumOrder();
+                        o.NameOrder = txtNameOrder.Text;
+                        o.Time = cbIsToday.IsChecked == true ? DateTime.Now.Date : datepicker.SelectedDate ?? DateTime.Now.Date;
+
+                        c.OrderIds.Add(o.Id.ToString());
+                        await orderRepos.AddOrderAsync(o);
+                    }
+                    await customerRepos.AddCustomerAsync(c);
+
+                    MessageBox.Show($"Đã thêm thành công khách hàng: {name}");
+
+                    txtName.Clear();
+                    txtPhone.Clear();
+
+                }
                 Products = new ObservableCollection<Product>
                 {
                    new Product()

@@ -26,7 +26,6 @@
         <DataGrid x:Name="dgv" Margin="10,139,10,150" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Tên phụ tùng" Width="*" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Số lượng" Width="*" Binding="{Binding Quantity}" />
                 <DataGridTextColumn Header="Giá" Width="*" Binding="{Binding Price}" />
             </DataGrid.Columns>
         </DataGrid>

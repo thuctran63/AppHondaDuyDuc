@@ -100,8 +100,8 @@
         <Button Content="Tìm kiếm" HorizontalAlignment="Left" Margin="408,10,0,0" VerticalAlignment="Top" Height="30" Width="106" Click="Button_Click_1"/>
 
         <!-- Edit and Delete Buttons -->
-        <Button x:Name="btnAddCustomer_Copy" Content="Chỉnh sửa" HorizontalAlignment="Left" Margin="162,61,0,0" VerticalAlignment="Top" Height="34" Width="142" Click="btnAddCustomer_Click"/>
-        <Button x:Name="btnAddCustomer_Copy1" Content="Xoá" HorizontalAlignment="Left" Margin="309,61,0,0" VerticalAlignment="Top" Height="34" Width="121" Click="btnAddCustomer_Click"/>
+        <Button x:Name="btnEditCustomer" Content="Chỉnh sửa" HorizontalAlignment="Left" Margin="162,61,0,0" VerticalAlignment="Top" Height="34" Width="142" Click="btnEditCustomer_Click"/>
+        <Button x:Name="btnDeleteCustomer" Content="Xoá" HorizontalAlignment="Left" Margin="309,61,0,0" VerticalAlignment="Top" Height="34" Width="121" Click="btnDeleteCustomer_Click"/>
 
         <!-- Add Order Button -->
         <Button x:Name="btnAddCustomer_Copy2" Content="Thêm hoá đơn" HorizontalAlignment="Left" Margin="599,61,0,0" VerticalAlignment="Top" Height="34" Width="118" Click="btnAddOrder_Click"/>

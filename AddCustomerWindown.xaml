@@ -22,68 +22,74 @@
                 <TextBlock FontWeight="Heavy" Text="Thông tin khách hàng" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,1,0,0" />
 
                 <!-- Nhãn và textbox cho Tên khách hàng -->
-                <Label Content="Tên khách hàng: " Width="123" HorizontalAlignment="Left" Margin="0,27,0,94" FontSize="15" />
-                <TextBox x:Name="txtName" Margin="128,27,225,0" FontSize="13" Height="27" VerticalAlignment="Top"/>
+                <Label Content="Tên khách hàng: " Width="155" HorizontalAlignment="Left" Margin="0,27,0,94" FontSize="20" />
+                <TextBox x:Name="txtName" Margin="155,31,198,0" FontSize="20" Height="33" VerticalAlignment="Top"/>
 
                 <!-- Nhãn và textbox cho Số điện thoại -->
-                <Label Content="Số điện thoại: " Width="123" HorizontalAlignment="Left" Margin="0,64,0,57" FontSize="15" />
-                <TextBox x:Name="txtPhone" Margin="128,64,225,0" FontSize="13" Height="27" VerticalAlignment="Top"/>
+                <Label Content="Số điện thoại: " Width="150" HorizontalAlignment="Left" Margin="0,64,0,57" FontSize="20" />
+                <TextBox x:Name="txtPhone" Margin="155,70,198,0" FontSize="20" Height="31" VerticalAlignment="Top"/>
 
                 <!-- Nhãn và combo box cho Địa chỉ -->
-                <Label Content="Địa chỉ: " Width="123" HorizontalAlignment="Left" Margin="0,101,0,31" FontSize="15" />
-                <ComboBox x:Name="cbbVillages" HorizontalAlignment="Left" Margin="128,106,0,0" VerticalAlignment="Top" Width="104"/>
-                <ComboBox x:Name="cbbWards" HorizontalAlignment="Left" Margin="248,106,0,0" VerticalAlignment="Top" Width="104"/>
-                <ComboBox x:Name="cbbProvinces" HorizontalAlignment="Left" Margin="374,106,0,0" VerticalAlignment="Top" Width="104"/>
+                <Label Content="Địa chỉ: " Width="123" HorizontalAlignment="Left" Margin="0,107,0,15" FontSize="20" />
+                <ComboBox x:Name="cbbVillages" HorizontalAlignment="Left" Margin="155,112,0,0" VerticalAlignment="Top" Width="104" Height="32"/>
+                <ComboBox x:Name="cbbWards" HorizontalAlignment="Left" Margin="272,112,0,0" VerticalAlignment="Top" Width="104" RenderTransformOrigin="0.5,0.5" Height="31">
+                    <ComboBox.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleX="2.39"/>
+                            <RotateTransform/>
+                            <TranslateTransform X="0.458"/>
+                        </TransformGroup>
+                    </ComboBox.RenderTransform>
+                </ComboBox>
+                <ComboBox x:Name="cbbProvinces" HorizontalAlignment="Left" Margin="392,112,0,0" VerticalAlignment="Top" Width="104" Height="32"/>
             </Grid>
         </Border>
 
         <!-- Thông tin đơn hàng -->
         <Grid Margin="2,0,0,0" Height="660" VerticalAlignment="Bottom" Grid.RowSpan="2" HorizontalAlignment="Left" Width="600">
             <!-- Tiêu đề "Thông tin đơn hàng (nếu có)" -->
-            <Label FontSize="14" FontWeight="Heavy" Content="Thông tin đơn hàng (nếu có):" HorizontalAlignment="Left" Height="31" VerticalAlignment="Top" Width="223" Margin="10,5,0,0"/>
+            <Label FontSize="20" FontWeight="Heavy" Content="Thông tin đơn hàng (nếu có):" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="307" Margin="10,5,0,0"/>
 
             <!-- DataGrid hiển thị sản phẩm trong đơn hàng -->
-            <DataGrid FontSize="15" x:Name="dgvProducts" LostFocus="dgvProducts_LostFocus" AutoGenerateColumns="False" Margin="10,276,10,0" CanUserAddRows="True" CanUserDeleteRows="True" SelectedIndex="0" Height="235" VerticalAlignment="Top">
+            <DataGrid FontSize="20" x:Name="dgvProducts" LostFocus="dgvProducts_LostFocus" AutoGenerateColumns="False" Margin="10,184,10,0" CanUserAddRows="True" CanUserDeleteRows="True" SelectedIndex="0" Height="235" VerticalAlignment="Top">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Tên phụ tùng" Width="*" Binding="{Binding Name}"/>
                     <DataGridTextColumn Header="Giá" Width="*" Binding="{Binding Price}" />
-                    <DataGridTextColumn Header="Số lượng" Width="*" Binding="{Binding Quantity}" />
                 </DataGrid.Columns>
             </DataGrid>
 
             <!-- Nhãn và label hiển thị tổng số tiền -->
-            <Label FontSize="14" Content="Tổng số tiền: " HorizontalAlignment="Left" Margin="4,516,0,0" VerticalAlignment="Top" Width="94"/>
-            <Label x:Name="lbSum" FontSize="14" FontWeight="Medium" Content="100000 VND" HorizontalAlignment="Right" Margin="0,0,326,116" VerticalAlignment="Bottom" Width="140" Height="27"/>
+            <Label FontSize="20" Content="Tổng số tiền: " HorizontalAlignment="Left" Margin="10,448,0,0" VerticalAlignment="Top" Width="125"/>
+            <Label x:Name="lbSum" FontSize="20" FontWeight="Medium" Content="0 VND" HorizontalAlignment="Right" Margin="0,0,265,170" VerticalAlignment="Bottom" Width="140" Height="32"/>
 
             <!-- Checkbox cho "Ngày hôm nay" -->
-            <CheckBox x:Name="cbIsToday" Content="Ngày hôm nay" HorizontalAlignment="Left" Margin="363,529,0,0" VerticalAlignment="Top" Click="cbIsToday_Click"/>
+            <CheckBox x:Name="cbIsToday" Content="Ngày hôm nay" Margin="379,466,0,0" VerticalAlignment="Top" Click="cbIsToday_Click" FontSize="20"/>
 
             <!-- DatePicker cho ngày đơn hàng -->
-            <DatePicker x:Name="datepicker" HorizontalAlignment="Left" Margin="466,525,0,0" VerticalAlignment="Top"/>
+            <DatePicker x:Name="datepicker" HorizontalAlignment="Left" Margin="379,498,0,0" VerticalAlignment="Top" FontSize="20"/>
 
             <!-- Nhãn và textbox cho số tiền khách trả -->
-            <Label FontSize="13" Content="Số tiền khách trả: " HorizontalAlignment="Left" Margin="4,545,0,0" VerticalAlignment="Top" Width="119"/>
-            <TextBox x:Name="txtPay" FontSize="14" HorizontalAlignment="Left" Height="24" Margin="134,545,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="140" LostFocus="txtPay_lostFocus" TextChanged="txtPay_TextChanged" />
+            <Label FontSize="20" Content="Số tiền khách trả: " HorizontalAlignment="Left" Margin="10,498,0,0" VerticalAlignment="Top" Width="174"/>
+            <TextBox x:Name="txtPay" FontSize="20" HorizontalAlignment="Left" Height="37" Margin="195,498,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="140" LostFocus="txtPay_lostFocus" TextChanged="txtPay_TextChanged" />
 
             <!-- Các nút "Tạo" và "Huỷ" -->
-            <Button x:Name="btnAdd" Content="Tạo" HorizontalAlignment="Left" Margin="134,618,0,0" Width="99" Height="32" VerticalAlignment="Top" Click="btnAdd_Click"/>
-            <Button x:Name="btnCancel" Content="Huỷ" HorizontalAlignment="Left" Margin="361,618,0,0" Width="99" Height="32" VerticalAlignment="Top"/>
+            <Button x:Name="btnAdd" Content="Tạo" HorizontalAlignment="Left" Margin="124,597,0,0" Width="99" Height="32" VerticalAlignment="Top" Click="btnAdd_Click" FontSize="20"/>
+            <Button x:Name="btnCancel" Content="Huỷ" HorizontalAlignment="Left" Margin="363,597,0,0" Width="99" Height="32" VerticalAlignment="Top" FontSize="20"/>
 
             <!-- Nhãn và textbox cho mô tả đơn hàng -->
-            <TextBlock FontSize="14"  HorizontalAlignment="Left" Margin="11,120,0,0" TextWrapping="Wrap" Text="Mô tả: " VerticalAlignment="Top" Width="68"/>
-            <TextBox x:Name="txtDescription" FontSize="14" HorizontalAlignment="Left" Margin="94,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="484" Height="114" AcceptsReturn="True"/>
 
             <!-- Nhãn và textbox cho biển số xe -->
-            <TextBlock FontSize="14"  HorizontalAlignment="Left" Margin="10,238,0,0" TextWrapping="Wrap" Text="Biển số xe: " VerticalAlignment="Top"/>
-            <TextBox x:Name="txtlicensePlates" FontSize="14" HorizontalAlignment="Left" Margin="94,237,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="484"/>
+            <TextBlock FontSize="20"  HorizontalAlignment="Left" Margin="10,138,0,0" TextWrapping="Wrap" Text="Biển số xe: " VerticalAlignment="Top"/>
+            <TextBox x:Name="txtlicensePlates" FontSize="14" HorizontalAlignment="Left" Margin="114,137,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="464" Height="28"/>
 
             <!-- Nhãn hiển thị tiền thừa và label cho giá trị -->
-            <Label x:Name="tbDebtOrChange" FontSize="13" Content="Tiền thừa: " HorizontalAlignment="Left" Margin="4,573,0,0" VerticalAlignment="Top" Width="112" Height="40"/>
-            <Label x:Name="tbValueDebtOrChange" FontSize="14" Content="" HorizontalAlignment="Left" Margin="134,577,0,47" Width="140"/>
+            <Label x:Name="tbDebtOrChange" FontSize="20" Content="Tiền thừa: " HorizontalAlignment="Left" Margin="10,540,0,0" VerticalAlignment="Top" Width="112" Height="40"/>
+            <Label x:Name="tbValueDebtOrChange" FontSize="20" Content="---" HorizontalAlignment="Left" Margin="195,544,0,80" Width="140"/>
 
             <!-- Nhãn và textbox cho tên đơn hàng -->
-            <TextBlock FontSize="14"  HorizontalAlignment="Left" Margin="9,41,0,0" TextWrapping="Wrap" Text="Tên đơn hàng: " VerticalAlignment="Top" Width="80"/>
-            <TextBox x:Name="txtNameOrder" FontSize="14" HorizontalAlignment="Left" Margin="94,41,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="484" Height="72" AcceptsReturn="True"/>
+            <TextBlock FontSize="20"  HorizontalAlignment="Left" Margin="9,41,0,0" TextWrapping="Wrap" Text="Tên đơn hàng: " VerticalAlignment="Top" Width="100"/>
+            <TextBox x:Name="txtNameOrder" FontSize="14" HorizontalAlignment="Left" Margin="114,41,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="464" Height="91" AcceptsReturn="True"/>
         </Grid>
     </Grid>
 </Window>

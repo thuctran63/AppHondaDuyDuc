@@ -47,6 +47,20 @@ namespace AppHondaDuyDuc
             addCustomerWindown.Show();
         }
 
+        private void btnEditCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            var customer = dgvCustomer.SelectedItem as Customer;
+            if (customer == null)
+            {
+                MessageBox.Show("Khách hàng ko hợp lệ!");
+                return;
+            }
+            CustomerWindown customerWindown = new CustomerWindown(customer);
+            customerWindown.Activate();
+            customerWindown.Show();
+
+        }
+
         private void btnAddOrder_Click(object sender, RoutedEventArgs e)
         {
             var customerSelect = dgvCustomer.SelectedItem as Customer;
@@ -150,6 +164,27 @@ namespace AppHondaDuyDuc
                     listCustomer = listCustomer.Distinct().ToList();
                     dgvCustomer.ItemsSource = listCustomer;
                 }
+            }
+        }
+
+        private async void btnDeleteCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            var customer = dgvCustomer.SelectedItem as Customer;
+            if (customer != null)
+            {
+                // messageBox xác nhận
+                var result = MessageBox.Show("Bạn có chắc chắn muốn xóa khách hàng này không?", "Xác nhận", MessageBoxButton.YesNo);
+
+                if (result == MessageBoxResult.No)
+                {
+                    return;
+                }
+
+                using (var customerRepos = new CustomerRepos())
+                {
+                    await customerRepos.DeleteCustomerById(customer.Id);
+                }
+                GetAllData();
             }
         }
     }

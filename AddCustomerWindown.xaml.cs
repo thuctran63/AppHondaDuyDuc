@@ -94,7 +94,7 @@ namespace AppHondaDuyDuc
             {
                 if(p != null)
                 {
-                    sum += p.Price * p.Quantity;
+                    sum += p.Price * 1;
                 }
             }
             lbSum.Content = $"{sum} VND";
@@ -108,7 +108,7 @@ namespace AppHondaDuyDuc
             {
                 if (p != null)
                 {
-                    sum += p.Price * p.Quantity;
+                    sum += p.Price * 1;
                 }
             }
 
@@ -129,7 +129,7 @@ namespace AppHondaDuyDuc
                         var orderRepos = new OrderRepos();
 
                         Order o = new Order();
-                        o.Desciption = txtDescription.Text;
+                        o.Desciption = "";
                         o.LicensePlates = txtlicensePlates.Text;
                         o.Products = Products.ToList();
                         o.UserId = customer.Id;
@@ -154,14 +154,12 @@ namespace AppHondaDuyDuc
                     c.Name = name;
                     c.PhoneNumber = phone;
 
-
-
                     if (CalcSumOrder() > 0)
                     {
                         var orderRepos = new OrderRepos();
 
                         Order o = new Order();
-                        o.Desciption = txtDescription.Text;
+                        o.Desciption ="";
                         o.LicensePlates = txtlicensePlates.Text;
                         o.Products = Products.ToList();
                         o.UserId = c.Id;
@@ -232,7 +230,7 @@ namespace AppHondaDuyDuc
                 }
             }
             catch {
-                tbValueDebtOrChange.Content = "0";
+                tbValueDebtOrChange.Content = "0 VND";
             }
             
         }

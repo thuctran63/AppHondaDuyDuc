@@ -25,6 +25,18 @@ namespace AppHondaDuyDuc.Database
             await _customers.InsertOneAsync(customer);
         }
 
+        // update customer
+        public async Task UpdateCustomer(Customer customer)
+        {
+            var filter = Builders<Customer>.Filter.Eq(x => x.Id, customer.Id);
+            var update = Builders<Customer>.Update
+                .Set(x => x.Name, customer.Name)
+                .Set(x => x.PhoneNumber, customer.PhoneNumber)
+                .Set(x => x.Address, customer.Address);
+
+            await _customers.UpdateOneAsync(filter, update);
+        }
+
         // Tìm kiếm theo Id
 
         public async Task<Customer> GetCustomerById(string id)
@@ -62,6 +74,12 @@ namespace AppHondaDuyDuc.Database
             var cursor = await _customers.FindAsync(filter);
             var customers = await cursor.ToListAsync();
             return customers;
+        }
+
+        // delete
+        public async Task DeleteCustomerById(string id)
+        {
+            await _customers.DeleteOneAsync(x => x.Id == id);
         }
 
 
